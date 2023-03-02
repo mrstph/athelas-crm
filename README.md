@@ -4,7 +4,7 @@
 
 ### Subject :
 
-I need to develop a CRM with Symfony that must contain :
+Develop a CRM webapp with Symfony that must contain :
 
 * 1 login, register and password reset page/modal
 * 1 contact book page listing all company contacts 
@@ -31,10 +31,20 @@ composer require symfony/requirements-checker
 
 ### Launch dev environment :
 
+Create an .env file based on the .env.example file
+
+- Install dependencies
+
 ```bash
 composer install
-npm install
-npm run build
 ```
 
-You also need to create an .env file based on the .env.example file
+```bash
+npm install
+```
+
+- Build packages
+
+```bash
+npm run build
+```
