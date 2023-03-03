@@ -24,3 +24,6 @@ import './mazer/js/bootstrap'
 
 // Symfony-Mazer
 import './symfony-mazer';
+
+// Datatables
+import './mazer/js/pages/simple-datatables';

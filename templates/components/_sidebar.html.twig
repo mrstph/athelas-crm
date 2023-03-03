@@ -2,7 +2,7 @@
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="{{ path('app_root') }}"><img src={{ asset('assets/images/logo/logo.svg') }} alt="Logo" srcset=""></a>
+                <a href="{{ path('app_root') }}"><img src={{ asset('assets/images/logo/athelas-logo.svg') }} alt="Logo" srcset=""></a>
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -39,48 +39,43 @@
     </div>
     <div class="sidebar-menu">
         <ul class="menu">
-            <li class="sidebar-title">Sidemenu Title</li>
-            <li class="sidebar-item has-sub {{ is_active('app_menu1') }}">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-building"></i>
-                    <span>Menu 1</span>
-                </a>
-                <ul class="submenu {{ is_active('app_menu1.submenu1') }}">
-                    <li class="submenu-item {{ is_active('app_menu1.submenu1') }}">
-                        <a href="{{ path('app_menu1.submenu1') }}">Submenu 1
-                            <i class="bi bi-person-lines-fill float-start me-1"></i>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            <li class="sidebar-title">Mon espace</li>
             <li class="sidebar-item {{ is_active('app_menu2') }}">
                 <a href="{{ path('app_menu2') }}" class='sidebar-link'>
                     <i class="bi bi-journals"></i>
-                    <span>Menu 2</span>
+                    <span>Mon tableau de bord</span>
                 </a>
             </li>
-            <li class="sidebar-item has-sub {{ is_active('app_menu3') }}">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-key"></i>
-                    <span>Menu 3</span>
+            <li class="sidebar-item {{ is_active('appp_menu2') }}">
+                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+                    <i class="bi bi-journals"></i>
+                    <span>Calendrier</span>
                 </a>
-                <ul class="submenu {{ is_active('app_menu3') }}">
-                    <li class="submenu-item {{ is_active('app_menu3.submenu1') }}">
-                        <a href="{{ path('app_menu3.submenu1') }}">Submenu 1
-                            <i class="bi bi-egg float-start me-1"></i>
-                        </a>
-                    </li>
-                    <li class="submenu-item {{ is_active('app_menu3.submenu2') }}">
-                        <a href="{{ path('app_menu3.submenu2') }}">Submenu 2
-                            <i class="bi bi-key-fill float-start me-1"></i>
-                        </a>
-                    </li>
-                    <li class="submenu-item {{ is_active('app_menu3.submenu3') }}">
-                        <a href="{{ path('app_menu3.submenu3') }}">Submenu 3
-                            <i class="bi bi-receipt float-start me-1"></i>
-                        </a>
-                    </li>
-                </ul>
+            </li>
+            <li class="sidebar-item {{ is_active('appp_menu2') }}">
+                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+                    <i class="bi bi-journals"></i>
+                    <span>Mon profil</span>
+                </a>
+            </li>
+            <li class="sidebar-title">Athelas</li>
+            <li class="sidebar-item {{ is_active('appp_menu2') }}">
+                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+                    <i class="bi bi-journals"></i>
+                    <span>Contacts</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ is_active('appp_menu2') }}">
+                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+                    <i class="bi bi-journals"></i>
+                    <span>Employés</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ is_active('appp_menu2') }}">
+                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+                    <i class="bi bi-journals"></i>
+                    <span>Entreprises</span>
+                </a>
             </li>
         </ul>
     </div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('app-dark') }}
+    {{ encore_entry_link_tags('auth') }}
+    <link rel="shortcut icon" href="{{asset('assets/images/logo/athelas-favicon.svg')}}" type="image/x-icon">
+    {# <link rel="shortcut icon" href="{{asset('assets/images/logo/favicon.png')}}" type="image/png"> #}
+</head>
+
+<body>
+    <div id="auth">
+        {% block body %}{% endblock %}
+    </div>
+</body>
+
+{{ encore_entry_script_tags('app') }}
+</html>

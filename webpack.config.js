@@ -21,6 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('auth', './assets/mazer/scss/pages/auth.scss')
     .addEntry('app-dark', './assets/mazer/scss/themes/dark/app-dark.scss')
     .addEntry('error', './assets/mazer/scss/pages/error.scss')
 
