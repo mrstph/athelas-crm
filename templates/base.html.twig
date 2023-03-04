@@ -8,7 +8,9 @@
 
     {% block stylesfirst %}{% endblock %}
     {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('notyf') }}
     {{ encore_entry_link_tags('app-dark') }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     {% block styles %}{% endblock %}
 
     <link rel="shortcut icon" href="{{ asset('assets/images/logo/athelas-favicon.svg') }}" type="image/x-icon">
@@ -23,11 +25,15 @@
             {% include "components/_navbar.html.twig" %}
         </header>
         <div id="main-content">
+            {% include "components/_message.html.twig" %}
             {% block body %}{% endblock %}
         </div>
     </div>
 </div>
 {{ encore_entry_script_tags('app') }}
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+{{ encore_entry_script_tags('notyf') }}
+</body>
 {% block js %}{% endblock %}
 </body>
 </html>

@@ -1,0 +1,13 @@
+<article class="mb-4">
+    {% for errorMessage in app.flashes('error') %}
+        {% if errorMessage %}
+            <div class="notify error-message">{{errorMessage}}</div>
+        {% endif %}
+    {% endfor %}
+
+    {% for successMessage in app.flashes('success') %}
+        {% if successMessage %}
+            <div class="success-message">{{successMessage}}</div>
+        {% endif %}
+    {% endfor %}
+</article>

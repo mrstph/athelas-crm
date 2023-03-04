@@ -9,8 +9,8 @@
     {{ encore_entry_link_tags('app') }}
     {{ encore_entry_link_tags('app-dark') }}
     {{ encore_entry_link_tags('auth') }}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="shortcut icon" href="{{asset('assets/images/logo/athelas-favicon.svg')}}" type="image/x-icon">
-    {# <link rel="shortcut icon" href="{{asset('assets/images/logo/favicon.png')}}" type="image/png"> #}
 </head>
 
 <body>
@@ -20,4 +20,6 @@
 </body>
 
 {{ encore_entry_script_tags('app') }}
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+{{ encore_entry_script_tags('notyf') }}
 </html>
