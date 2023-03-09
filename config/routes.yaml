@@ -3,3 +3,116 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# ~~~ DASHBOARD ~~~
+
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
+
+dashboard_redirect:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: 'dashboard'
+        permanent: false
+
+dashboard_index_redirect:
+    path: /index
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: 'dashboard'
+        permanent: false
+
+# ~~~ LOGIN ~~~
+
+app_login:
+    methods: GET|POST
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    methods: GET
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+# ~~~ USERS ~~~
+
+users_index:
+    methods: GET
+    path: /users
+    controller: App\Controller\UserController::index
+
+users_new:
+    methods: GET|POST
+    path: /users/new
+    controller: App\Controller\UserController::new
+
+users_show:
+    methods: GET
+    path: /users/{id}
+    controller: App\Controller\UserController::show
+
+users_edit:
+    methods: GET|POST
+    path: /users/{id}/edit
+    controller: App\Controller\UserController::edit
+
+users_delete:
+    methods: POST
+    path: /users/{id}/delete
+    controller: App\Controller\UserController::delete
+
+# ~~~ COMPANIES ~~~
+
+companies_index:
+    methods: GET
+    path: /companies
+    controller: App\Controller\CompanyController::index
+
+companies_new:
+    methods: GET|POST
+    path: /companies/new
+    controller: App\Controller\CompanyController::new
+
+companies_show:
+    methods: GET
+    path: /companies/{id}
+    controller: App\Controller\CompanyController::show
+
+companies_edit:
+    methods: GET|POST
+    path: /companies/{id}/edit
+    controller: App\Controller\CompanyController::edit
+
+companies_delete:
+    methods: POST
+    path: /companies/{id}/delete
+    controller: App\Controller\CompanyController::delete
+
+# ~~~ CONTACTS ~~~
+
+contacts_index:
+    methods: GET
+    path: /contacts
+    controller: App\Controller\ContactController::index
+
+contacts_new:
+    methods: GET|POST
+    path: /contacts/new
+    controller: App\Controller\ContactController::new
+
+contacts_show:
+    methods: GET
+    path: /contacts/{id}
+    controller: App\Controller\ContactController::show
+
+contacts_edit:
+    methods: GET|POST
+    path: /contacts/{id}/edit
+    controller: App\Controller\ContactController::edit
+
+contacts_delete:
+    methods: POST
+    path: /contacts/{id}/delete
+    controller: App\Controller\ContactController::delete
