@@ -2,7 +2,7 @@
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="{{ path('app_root') }}"><img src={{ asset('assets/images/logo/athelas-logo.svg') }} alt="Logo" srcset=""></a>
+                <a href="{{ path('dashboard') }}"><img src={{ asset('assets/images/logo/athelas-logo.svg') }} alt="Logo" srcset=""></a>
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -40,39 +40,41 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-title">Mon espace</li>
-            <li class="sidebar-item {{ is_active('app_menu2') }}">
-                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+            <li class="sidebar-item {{ is_active('dashboard') }}">
+                <a href="{{ path('dashboard') }}" class='sidebar-link'>
                     <i class="bi bi-kanban"></i>
                     <span>Tableau de bord</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ is_active('appp_menu2') }}">
-                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+            {# ------------------- IS ACTIVE ------------------- #}
+            <li class="sidebar-item {{ is_active('x') }}">
+                <a href="{{ path('dashboard') }}" class='sidebar-link'>
                     <i class="bi bi-calendar"></i>
                     <span>Calendrier</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ is_active('appp_menu2') }}">
-                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+            {# ------------------- IS ACTIVE ------------------- #}
+            <li class="sidebar-item {{ is_active('x') }}">
+                <a href="{{ path('dashboard') }}" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
                     <span>Profil</span>
                 </a>
             </li>
             <li class="sidebar-title">Athelas</li>
-            <li class="sidebar-item {{ is_active('appp_menu2') }}">
-                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
-                    <i class="bi bi-journal-bookmark-fill"></i>
-                    <span>Contacts</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ is_active('appp_menu2') }}">
-                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+            <li class="sidebar-item {{ is_active('users_index') }}">
+                <a href="{{ path('users_index') }}" class='sidebar-link'>
                     <i class="bi bi-person-vcard-fill"></i>
                     <span>Employés</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ is_active('appp_menu2') }}">
-                <a href="{{ path('app_menu2') }}" class='sidebar-link'>
+            <li class="sidebar-item {{ is_active('contacts_index') }}">
+                <a href="{{ path('contacts_index') }}" class='sidebar-link'>
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span>Contacts</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ is_active('companies_index') }}">
+                <a href="{{ path('companies_index') }}" class='sidebar-link'>
                     <i class="bi bi-building-fill"></i>
                     <span>Entreprises</span>
                 </a>
