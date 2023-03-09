@@ -53,9 +53,8 @@
                     <span>Calendrier</span>
                 </a>
             </li>
-            {# ------------------- IS ACTIVE ------------------- #}
-            <li class="sidebar-item {{ is_active('x') }}">
-                <a href="{{ path('dashboard') }}" class='sidebar-link'>
+            <li class="sidebar-item {{ is_active('profile') }}">
+                <a href="{{ path('profile', {id: app.user.id}) }}" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
                     <span>Profil</span>
                 </a>
