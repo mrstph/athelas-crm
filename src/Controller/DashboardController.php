@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\CompanyRepository;
+use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DashboardController extends AbstractController
 {
-    public function index(): Response
+    public function index(CompanyRepository $companyRepository, ContactRepository $contactRepository): Response
     {
         //redirect user if not logged in
         if(!$this->getUser()){
@@ -18,6 +20,8 @@ class DashboardController extends AbstractController
         }
 
         return $this->render('dashboard/index.html.twig', [
+            'contacts' => $contactRepository->getFiveLastContactsAdded(),
+            'companies' => $companyRepository->getFiveLastCompaniesAdded(),
         ]);
     }
 }

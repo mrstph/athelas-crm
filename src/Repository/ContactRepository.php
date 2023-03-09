@@ -40,6 +40,16 @@ class ContactRepository extends ServiceEntityRepository
         }
     }
 
+    public function getFiveLastContactsAdded()
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.created_at', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // public function findAllContactsThatAreNotUsers()
     // {
         // $conn = $this->getEntityManager()->getConnection();

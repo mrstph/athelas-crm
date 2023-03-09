@@ -39,6 +39,16 @@ class CompanyRepository extends ServiceEntityRepository
         }
     }
 
+    public function getFiveLastCompaniesAdded()
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.created_at', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Company[] Returns an array of Company objects
 //     */
