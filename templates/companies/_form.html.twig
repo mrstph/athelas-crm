@@ -1,0 +1,20 @@
+{{ form_start(form, { 'attr':{'id':'company'}})  }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.address) }}
+    {{ form_row(form.zip_code) }}
+    {{ form_row(form.city) }}
+{{ form_end(form) }}
+
+    <div class="col-12 d-flex justify-content-start mt-4">
+        <button form="company" type="submit" class="btn btn-primary me-1 mb-1">{{ button_label|default('Ajouter') }}</button>
+
+        {# only show the delete button when editing a company #}
+            
+        {% if app.request.attributes.get('_route') == 'companies_edit' %}
+            {{ include('companies/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+
+
