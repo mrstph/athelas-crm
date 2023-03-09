@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employés | Athelas {% endblock %}
+
+{% block body %}
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Liste des employés</h3>
+                <p class="text-subtitle text-muted">Toutes les entreprises enregistrées.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('companies_index')}}">Entreprises</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Liste</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <th>Identifiant</th>
+                        {% endif %}
+                            <th>Poste</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>E-mail</th>
+                            <th>Téléphone</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.picture }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>{{ user.username }}</td>
+                            {% endif %}
+                                <td>{{ user.positionCompany }}</td>
+                                <td>{{ user.contact.firstname }}</td>
+                                <td>{{ user.contact.lastname }}</td>
+                                <td>{{ user.contact.email }}</td>
+                                <td>{{ user.contact.phone }}</td>
+                                <td>
+                                    <a href="{{ path('users_show', {'id': user.id}) }}"><button class="btn btn-secondary me-1">Voir</button></a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="{{ path('users_edit', {'id': user.id}) }}"><button class="btn btn-primary me-1">Modifier</button></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8">Aucun employé trouvé</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="col-12 d-flex justify-content-start">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('users_new') }}"><button class="btn btn-primary me-1">Ajouter un employé</button></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block styles %}
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+{% endblock %}

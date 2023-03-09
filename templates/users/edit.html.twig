@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ user.contact.firstname }} {{ user.contact.lastname }} | Athelas {% endblock %}
+
+{% block body %}
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>{{ user.contact.firstname }} {{ user.contact.lastname }}</h3>
+                    <p class="text-subtitle text-muted">Changez les informations et appuyez sur "Valider" pour appliquer les changements.</p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('users_index') }}">Employés</a></li>
+                            <li class="breadcrumb-item"><a href="{{ path('users_show', {id: user.id}) }}">{{ user.contact.firstname}} {{user.contact.lastname}}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Modifier</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        {{ include('users/_form.html.twig', { button_label : 'Valider' }) }}
+{% endblock %}
