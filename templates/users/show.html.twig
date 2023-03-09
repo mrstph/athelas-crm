@@ -20,60 +20,71 @@
                 </div>
             </div>
         </div>
-<table class="table">
-        <tbody>
-        {% if is_granted('ROLE_ADMIN') %}
-            <tr>
-                <th>Nom d'utilisateur</th>
-                <td>{{ user.username }}</td>
-            </tr>
-        {% endif %}
-        {# picture #}
-            <tr>
-                <th>Prénom</th>
-                <td>{{ user.contact.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.contact.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Poste</th>
-                <td>{{ user.positionCompany }}</td>
-            </tr>
-            <tr>
-                <th>E-mail</th>
-                <td>{{ user.contact.email }}</td>
-            </tr>
-            <tr>
-                <th>Téléphone</th>
-                <td>{{ user.contact.phone }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.contact.address }}</td>
-            </tr>
-            <tr>
-                <th>Code postal</th>
-                <td>{{ user.contact.zipCode }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.contact.city }}</td>
-            </tr>
-            <tr>
-                <th>Pays</th>
-                <td>{{ user.contact.country }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="col-12 d-flex justify-content-start my-4">
-            <a href="{{ path('users_edit', {'id': user.id}) }}"><button class="btn btn-primary me-1">Modifier</button></a>
-            {% if user.id != 1 %}
-                {{ include('users/_delete_form.html.twig') }}
-            {% endif %}
-        </div>
+        <section class="section">
+            <div class="row" id="basic-table">
+                <div class="col-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/images/faces/1.b3a5b17d.jpg" alt="Face 1" />
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">{{ user.contact.firstname }} {{ user.contact.lastname }}</h5>
+                                    <h6 class="text-muted mb-0">{{ user.positionCompany }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <tr>
+                                                <th>Nom d'utilisateur</th>
+                                                <td>{{ user.username }}</td>
+                                            </tr>
+                                        {% endif %}
+                                            <tr>
+                                                <th>E-mail</th>
+                                                <td>{{ user.contact.email }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Téléphone</th>
+                                                <td>{{ user.contact.phone }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Adresse</th>
+                                                <td>{{ user.contact.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Code postal</th>
+                                                <td>{{ user.contact.zipCode }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Ville</th>
+                                                <td>{{ user.contact.city }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Pays</th>
+                                                <td>{{ user.contact.country }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <div class="col-12 d-flex justify-content-start my-4">
+                                        <a href="{{ path('users_edit', {'id': user.id}) }}"><button class="btn btn-primary me-1">Modifier</button></a>
+                                        {% if user.id != 1 %}
+                                            {{ include('users/_delete_form.html.twig') }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     {% endif %}
 {% endblock %}

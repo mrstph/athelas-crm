@@ -43,7 +43,13 @@
                     <tbody>
                         {% for user in users %}
                             <tr>
-                                <td>{{ user.picture }}</td>
+                                <td>
+                                    <div class="class="d-flex align-items-center"">
+                                        <div class="avatar avatar-md">
+                                            <img src="/assets/images/faces/1.b3a5b17d.jpg" alt="Face 1">
+                                        </div>
+                                    </div>
+                                </td>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <td>{{ user.username }}</td>
                             {% endif %}
