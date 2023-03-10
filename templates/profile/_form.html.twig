@@ -1,0 +1,15 @@
+{{ form_start(form, { 'attr':{'id':'profile'}}) }}
+    {{ form_row(form.contact.email) }}
+    {{ form_row(form.contact.phone) }}
+    {{ form_row(form.contact.address) }}
+    {{ form_row(form.contact.zip_code) }}
+    {{ form_row(form.contact.city) }}
+    {{ form_row(form.contact.country) }}
+    {{ form_row(form._token) }}
+    {{ form_row(form.picture) }}
+{{ form_end(form, {'render_rest': false}) }}
+
+    <div class="col-12 d-flex justify-content-start mt-4">
+        <button form="profile" type="submit" class="btn btn-primary me-1 mb-1">Valider</button>
+        <a href="{{ path('profile', {id: app.user.id}) }}"><button class="btn btn-secondary me-1 mb-1">Annuler</button></a>    
+    </div>
