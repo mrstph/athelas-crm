@@ -10,6 +10,15 @@
     <div class="col-12 d-flex justify-content-start mt-4">
         <button form="company" type="submit" class="btn btn-primary me-1 mb-1">{{ button_label|default('Ajouter') }}</button>
 
+        {# the cancel button redirects to index when on the create form page
+        the cancel button redirects to the previous user when on the create form page #}
+
+        {% if app.request.attributes.get('_route') == 'companies_new' %}
+            <a href="{{ path('companies_index') }}"><button class="btn btn-secondary me-1 mb-1">Annuler</button></a>
+        {% else %}
+            <a href="{{ path('companies_show', {id: company.id}) }}"><button class="btn btn-secondary me-1 mb-1">Annuler</button></a>
+        {% endif %}
+
         {# only show the delete button when editing a company #}
             
         {% if app.request.attributes.get('_route') == 'companies_edit' %}

@@ -14,6 +14,15 @@
     <div class="col-12 d-flex justify-content-start mt-4">
         <button form="contact" type="submit" class="btn btn-primary me-1 mb-1">{{ button_label|default('Ajouter') }}</button>
 
+        {# the cancel button redirects to index when on the create form page
+        the cancel button redirects to the previous user when on the create form page #}
+
+        {% if app.request.attributes.get('_route') == 'contacts_new' %}
+            <a href="{{ path('contacts_index') }}"><button class="btn btn-secondary me-1 mb-1">Annuler</button></a>
+        {% else %}
+            <a href="{{ path('contacts_show', {id: contact.id}) }}"><button class="btn btn-secondary me-1 mb-1">Annuler</button></a>
+        {% endif %}
+
         {# only show the delete button when editing a contact #}
             
         {% if app.request.attributes.get('_route') == 'contacts_edit' %}
