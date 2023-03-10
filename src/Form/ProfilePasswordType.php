@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class ProfilePasswordType extends AbstractType
 {
@@ -29,6 +30,10 @@ class ProfilePasswordType extends AbstractType
                 new Length([
                     'min' => 8,
                     'minMessage' => 'Le mot de passe doit contenir plus de {{ limit }} caractères',
+                ]),
+                new Regex([
+                    'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                    'message' => 'Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial.'
                 ])
             ]
         ])
