@@ -22,6 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('notyf', './assets/notyf.js')
+    .addEntry('calendar', './assets/calendar.js')
     .addEntry('auth', './assets/mazer/scss/pages/auth.scss')
     .addEntry('app-dark', './assets/mazer/scss/themes/dark/app-dark.scss')
     .addEntry('error', './assets/mazer/scss/pages/error.scss')

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\Table(name: 'events')]
@@ -15,30 +16,39 @@ class Event
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["getEvents"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getEvents"])]
     private ?string $label = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(["getEvents"])]
     private ?\DateTimeInterface $date_start = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(["getEvents"])]
     private ?\DateTimeInterface $date_end = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(["getEvents"])]
     private ?bool $all_day = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Groups(["getEvents"])]
     private ?string $background_color = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(["getEvents"])]
     private ?string $description = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Groups(["getEvents"])]
     private ?string $location = null;
 
     #[ORM\ManyToMany(targetEntity: Contact::class, mappedBy: 'event')]
+    #[Groups(["getEvents"])]
     private Collection $contacts;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Invite::class, orphanRemoval: true)]
@@ -140,7 +150,7 @@ class Event
     }
 
     /**
-     * @return Collection<int, Contact>
+     * @return Collection <int, Contact>
      */
     public function getContacts(): Collection
     {
@@ -167,7 +177,7 @@ class Event
     }
 
     /**
-     * @return Collection<int, Invite>
+     * @return Collection <int, Invite>
      */
     public function getInvites(): Collection
     {

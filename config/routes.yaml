@@ -133,3 +133,32 @@ profile_edit_password:
     methods: GET|POST
     path: /profile/{id}/edit-password
     controller: App\Controller\ProfileController::editPassword
+
+# ~~~ CALENDAR ~~~
+
+calendar:
+    methods: GET
+    path: /calendar
+    controller: App\Controller\CalendarController::index
+
+# ~~~ EVENTS API ~~~
+
+events_index:
+    methods: GET
+    path: /api/events
+    controller: App\Controller\EventController::index
+
+events_new:
+    methods: POST
+    path: /api/events
+    controller: App\Controller\EventController::new
+
+# events_edit:
+#     methods: PUT
+#     path: /api/events
+#     controller: App\Controller\EventController::edit
+
+# events_delete:
+#     methods: DELETE
+#     path: /api/events
+#     controller: App\Controller\EventController::delete

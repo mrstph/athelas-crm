@@ -1,0 +1,45 @@
+<div class="modal fade text-left" id="add-event-modal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Ajouter un événement</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            {{ form_start(form, {'action': path('events_new'), 'method': 'POST', 'attr':{'id':'add-event-form'}} ) }}
+                <div class="modal-body">
+                    {{ form_row(form.label) }}
+                    {{ form_row(form.date_start) }}
+                    {{ form_row(form.date_end) }}
+                    {{ form_row(form.all_day) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.location) }}
+                    {{ form_row(form.background_color) }}
+                    {{ form_row(form._token) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="add-event-confirm" class="btn btn-primary ml-1">
+                        <i class="bx bx-check d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Valider</span>
+                    </button>
+                    <button type="button" class="btn btn-light-secondary"
+                        data-bs-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Fermer</span>
+                    </button>
+                </div>
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+</div>
+
+
+
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}

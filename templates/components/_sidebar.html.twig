@@ -46,9 +46,8 @@
                     <span>Tableau de bord</span>
                 </a>
             </li>
-            {# ------------------- IS ACTIVE ------------------- #}
-            <li class="sidebar-item {{ is_active('x') }}">
-                <a href="{{ path('dashboard') }}" class='sidebar-link'>
+            <li class="sidebar-item {{ is_active('calendar') }}">
+                <a href="{{ path('calendar') }}" class='sidebar-link'>
                     <i class="bi bi-calendar"></i>
                     <span>Calendrier</span>
                 </a>
