@@ -223,7 +223,7 @@ class Contact
     }
 
     /**
-     * @return Collection<int, Event>
+     * @return Collection <int, Event>
      */
     public function getEvent(): Collection
     {
@@ -247,7 +247,7 @@ class Contact
     }
 
     /**
-     * @return Collection<int, Invite>
+     * @return Collection <int, Invite>
      */
     public function getInvites(): Collection
     {
@@ -277,7 +277,7 @@ class Contact
     }
 
     /**
-     * @return Collection<int, Invite>
+     * @return Collection <int, Invite>
      */
     public function getReceivedInvites(): Collection
     {

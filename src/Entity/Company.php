@@ -135,7 +135,7 @@ class Company
     }
 
     /**
-     * @return Collection<int, Contact>
+     * @return Collection <int, Contact>
      */
     public function getContacts(): Collection
     {

@@ -35,6 +35,11 @@ class UserController extends AbstractController
             $contact = $form->getData()->getContact();
             $user = $form->getData();
 
+            //store the firstname and lastname with first letter in uppercase in the DB
+            //this restriction is not applied in edit to allow more Flexibility (ie with names like 'Jean-Charles')
+            $contact->setFirstname( ucfirst(strtolower($form->getData()->getContact()->getFirstname())));
+            $contact->setLastname( ucfirst(strtolower($form->getData()->getContact()->getLastname())));
+
             //assign remaining values
             $user->setConsent(false);
             $user->setPicture('placeholder');
@@ -43,7 +48,7 @@ class UserController extends AbstractController
             $userRepository->save($user, true);
             $contactRepository->save($contact, true);
             
-            $this->addFlash('success', 'Nouvelle employé créé');
+            $this->addFlash('success', 'Nouvel employé créé');
 
             return $this->redirectToRoute('users_index', [], Response::HTTP_SEE_OTHER);
         }

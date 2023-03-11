@@ -28,10 +28,10 @@
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
-                            <th></th>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <th>Identifiant</th>
-                        {% endif %}
+                            <th>Photo</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <th>Identifiant</th>
+                            {% endif %}
                             <th>Poste</th>
                             <th>Prénom</th>
                             <th>Nom</th>

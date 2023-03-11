@@ -27,8 +27,8 @@ class UserContactFixtures extends Fixture
 
         $contact = new Contact();
 
-        $contact->setFirstname('admin');
-        $contact->setLastname('athelas');
+        $contact->setFirstname('Admin');
+        $contact->setLastname('Athelas');
         $contact->setEmail('admin@athelas.fr');
         $contact->setPhone('+33567890987');
         $contact->setAddress('1 rue du château d\'eau');

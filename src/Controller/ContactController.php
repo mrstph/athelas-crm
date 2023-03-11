@@ -25,6 +25,12 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //store the firstname and lastname with first letter in uppercase in the DB
+            //this restriction is not applied in edit to allow more Flexibility (ie with names like 'Jean-Charles')
+            $contact->setFirstname( ucfirst(strtolower($form->getData()->getFirstname())));
+            $contact->setLastname( ucfirst(strtolower($form->getData()->getLastname())));
+
             $contact->setCreatedAt(new \DateTimeImmutable());
             $contactRepository->save($contact, true);
 
