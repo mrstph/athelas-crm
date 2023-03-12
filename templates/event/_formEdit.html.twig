@@ -1,0 +1,39 @@
+<div class="modal fade text-left" id="edit-event-modal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel34">Modifier</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            {{ form_start(formEdit, {'method': 'PUT', 'attr':{'id':'edit-event-form'}} ) }}
+                <div class="modal-body">
+                    {{ form_row(formEdit.label, { 'id': 'edit-event-title'}) }}
+                    {{ form_row(formEdit.date_start, {'id': 'edit-event-start'}) }}
+                    {{ form_row(formEdit.date_end, {'id': 'edit-event-end'}) }}
+                    {{ form_row(formEdit.all_day, {'id': 'edit-event-all-day'}) }}
+                    {{ form_row(formEdit.description, {'id': 'edit-event-description'}) }}
+                    {{ form_row(formEdit.location, {'id': 'edit-event-location'}) }}
+                    {{ form_row(formEdit.background_color, {'id': 'edit-event-background-color'}) }}
+                    {{ form_row(formEdit._token) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="edit-event-confirm" data-id="" class="btn btn-primary ml-1">Valider</button>
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" id="delete-event" data-id="" class="btn btn-danger">Supprimer</button>
+                </div>
+            {{ form_end(formEdit, {'render_rest': false}) }}
+        </div>
+    </div>
+</div>
+
+
+
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}

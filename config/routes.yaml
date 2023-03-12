@@ -153,12 +153,12 @@ events_new:
     path: /api/events
     controller: App\Controller\EventController::new
 
-# events_edit:
-#     methods: PUT
-#     path: /api/events
-#     controller: App\Controller\EventController::edit
+events_edit:
+    methods: PUT
+    path: /api/events/{id}
+    controller: App\Controller\EventController::edit
 
-# events_delete:
-#     methods: DELETE
-#     path: /api/events
-#     controller: App\Controller\EventController::delete
+events_delete:
+    methods: DELETE
+    path: /api/events/{id}
+    controller: App\Controller\EventController::delete

@@ -37,11 +37,13 @@ class EventType extends AbstractType
                 ])
             ->add('date_start', DateTimeType::class, [
                 'date_widget' => 'single_text',
-                'label' => 'Début'
+                'label' => 'Début',
+                // 'data' => new \DateTime() // add todays timestamp
                 ])
             ->add('date_end', DateTimeType::class, [
                 'date_widget' => 'single_text',
-                'label' => 'Fin'
+                'label' => 'Fin',
+                // 'data' => new \DateTime() // add todays timestamp
                 ])
             ->add('all_day', CheckboxType::class, [
                 'label' => 'Toute la journée ?',
@@ -68,6 +70,7 @@ class EventType extends AbstractType
             ->add('background_color', ColorType::class, [
                     'required' => false,
                     'label' => 'Couleur',
+                    'data' => '#435ebe'
                 ])
         ;
     }

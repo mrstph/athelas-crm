@@ -11,9 +11,11 @@ class CalendarController extends AbstractController
     public function index(): Response
     {
         $form = $this->createForm(EventType::class);
+        $formEdit = $this->createForm(EventType::class);
 
         return $this->render('calendar/index.html.twig', [
-            'form' => $form
+            'form' => $form,
+            'formEdit' => $formEdit,
         ]);
     }
 }
