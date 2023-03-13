@@ -74,52 +74,40 @@ class EventController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
-        // dd($request->request->all());
-        // update the calendar events when drag and drop
-        $data = $request->request->all();
-        // $data = json_decode($request->getContent(), true);
+        $data = json_decode($request->getContent(), true);
         $event = $eventRepository->find($data['id']);
 
-        // $formEdit = $this->createForm(EventType::class, $event);
-        // $formEdit->handleRequest($data);
+        $event->setLabel($data['title']);
+        $event->setDateStart(new \DateTime($data['start']));
+        $event->setDateEnd(new \DateTime($data['end']));
+        $event->setBackgroundColor($data['backgroundColor']);
+        if(!empty($data['description'])){
+            $event->setAllDay($data['allDay']);
+        }
+        if(!empty($data['description'])){
+            $event->setDescription($data['description']);
+        }
+        if(!empty($data['location'])){
+            $event->setLocation($data['location']);
+        }
 
-        // if ($formEdit->isSubmitted() && $formEdit->isValid()) {
-            $event->setLabel($data['title']);
-            $event->setDateStart(new \DateTime($data['start']));
-            $event->setDateEnd(new \DateTime($data['end']));
-            $event->setBackgroundColor($data['backgroundColor']);
-            if(!empty($data['description'])){$event->setAllDay($data['allDay']);}
-            if(!empty($data['description'])){$event->setDescription($data['description']);}
-            if(!empty($data['location'])){$event->setLocation($data['location']);}
+        $eventRepository->save($event, true);
 
-            $eventRepository->save($event, true);
+        $data[] = [
+            'id' => $event->getId(),
+            'title' => $event->getLabel(),
+            'start' => $event->getDateStart()->format('Y-m-d H:i:s'),
+            'end' => $event->getDateEnd()->format('Y-m-d H:i:s'),
+            'allDay' => $event->isAllDay(),
+            'backgroundColor' => $event->getBackgroundColor(),
+            'description' => $event->getDescription(),
+            'location' => $event->getLocation()
+        ];
 
-            $data[] = [
-                'id' => $event->getId(),
-                'title' => $event->getLabel(),
-                'start' => $event->getDateStart()->format('Y-m-d H:i:s'),
-                'end' => $event->getDateEnd()->format('Y-m-d H:i:s'),
-                'allDay' => $event->isAllDay(),
-                'backgroundColor' => $event->getBackgroundColor(),
-                'description' => $event->getDescription(),
-                'location' => $event->getLocation()
-            ];
-
-            return new JsonResponse($data, 200);
-        // }
-
-        // if (!$formEdit->isSubmitted()) {
-
-            // $event->setDateStart(new \DateTime($data['start']));
-            // $event->setDateEnd(new \DateTime($data['end']));
-    
-            // $eventRepository->save($event, true);
-
-            // return new JsonResponse($event, 200);
-        // }
+        return new JsonResponse($data, 200);
 
         //deal with errors later
-    //     return new JsonResponse('error');
+        // return new JsonResponse('error');
 
     }
 

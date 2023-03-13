@@ -64,18 +64,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // ~~~ ADD EVENT FROM CLICKING THE CALENDAR ~~~
 
-        select: function(){
-            addEventModal.show();
-            //need to add the logic to create event with selected date
-        },
+        // select: function(){
+        //     addEventModal.show();
+        //     //need to add the logic to create event with selected date
+        // },
 
         // ~~~ EDIT EVENT ~~~
 
         eventClick: function(event) {
             editEventModal.show();
             editEventTitle.value = event.event.title;
-            editEventStart.value = event.event.start;
-            editEventEnd.value = event.event.end;
+            editEventStart.valueAsDate = event.event.start;
+            editEventEnd.valueAsDate = event.event.end;
             editEventAllDay.value = event.event.allDay;
             editEventDescription.value = event.event.extendedProps.description;
             editEventLocation.value = event.event.extendedProps.location;
@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Get the add event form
     document.getElementById('add-event-form').addEventListener("submit", function(e){
+        let currentForm = document.getElementById('add-event-form');
         // prevent submiting and page reload
         e.preventDefault();
         // fetch datas
@@ -115,11 +116,13 @@ document.addEventListener('DOMContentLoaded', function() {
             body: new FormData(e.target)
         })
         // handle 201 response
-            .then(response => response.json())
-            .then(calendar.refetchEvents()) //refetch all the events on the page
-            .then(this.reset()) // reset the form
-            .then(addEventModal.hide()) // hide the modal
-            .then(notyf.success('Votre événement a été créé avec succès')) // toast success message
+            .then( function() {
+                response => response.json();
+                calendar.refetchEvents(); //refetch all the events on the page
+                currentForm.reset(); // reset the form
+                addEventModal.hide(); // hide the modal
+                notyf.success('Votre événement a été créé avec succès'); // toast success message
+            }) 
         // add json errors
     });
 
@@ -134,17 +137,18 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body:JSON.stringify(e.event)
         })
-            .then(response => response.json())
-            .then(calendar.refetchEvents())
-            .then(notyf.success('Votre événement a été modifié avec succès')) // toast success message
+            .then( function() {
+                response => response.json();
+                calendar.refetchEvents(); //refetch all the events on the page
+                notyf.success('Votre événement a été modifié avec succès'); // toast success message
+            })
         // add json errors
     });
 
     // ~~~ EDIT EVENT ~~~
 
-    // WARNING : not tested because of date conversions 
-    
     document.getElementById('edit-event-form').addEventListener("submit", function(e){
+        let currentForm = document.getElementById('edit-event-form');
         e.preventDefault();
         // fetch datas
         fetch(window.location.protocol + '//' + window.location.host + '/api/events/' + buttonEditEventConfirm.getAttribute('data-id'), {
@@ -165,12 +169,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         })
             // handle 200 response
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .then(calendar.refetchEvents()) //refetch all the events on the page
-            .then(this.reset()) // reset the form
-            .then(editEventModal.hide()) // hide the modal
-            .then(notyf.success('Votre événement a été modifié avec succès')) // toast success message
+            .then( function(){
+                response => response.json();
+                calendar.refetchEvents(); //refetch all the events on the page
+                currentForm.reset(); // reset the form
+                editEventModal.hide(); // hide the modal
+                notyf.success('Votre événement a été modifié avec succès'); // toast success message
+            })
         // add json errors
     });
 
@@ -188,10 +193,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         })
         // handle 201 response
-            .then(response => response.json())
-            .then(calendar.refetchEvents()) //refetch all the events on the page
-            .then(editEventModal.hide()) // hide the modal
-            .then(notyf.success('Votre événement a été supprimé avec succès')) // toast success message
+            .then( function() {
+                response => response.json();
+                editEventModal.hide(); // hide the modal
+                calendar.refetchEvents(); //refetch all the events on the page
+                notyf.success('Votre événement a été supprimé avec succès'); // toast success message
+            }) 
         // add json errors
     });
 

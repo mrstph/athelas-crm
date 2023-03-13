@@ -38,12 +38,12 @@ class EventType extends AbstractType
             ->add('date_start', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'label' => 'Début',
-                // 'data' => new \DateTime() // add todays timestamp
+                'data' => new \DateTime() // add todays date
                 ])
             ->add('date_end', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'label' => 'Fin',
-                // 'data' => new \DateTime() // add todays timestamp
+                'data' => new \DateTime() // add todays date
                 ])
             ->add('all_day', CheckboxType::class, [
                 'label' => 'Toute la journée ?',

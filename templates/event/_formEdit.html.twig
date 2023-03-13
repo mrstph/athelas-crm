@@ -13,8 +13,10 @@
             {{ form_start(formEdit, {'method': 'PUT', 'attr':{'id':'edit-event-form'}} ) }}
                 <div class="modal-body">
                     {{ form_row(formEdit.label, { 'id': 'edit-event-title'}) }}
-                    {{ form_row(formEdit.date_start, {'id': 'edit-event-start'}) }}
-                    {{ form_row(formEdit.date_end, {'id': 'edit-event-end'}) }}
+                    <label class="col-form-label required">Début</label>
+                    <input class="form-control" name="event[date_start][date]" type="datetime-local" id="edit-event-start">
+                    <label class="col-form-label required">Fin</label>
+                    <input class="form-control mb-3" name="event[date_end][date]" type="datetime-local" id="edit-event-end">
                     {{ form_row(formEdit.all_day, {'id': 'edit-event-all-day'}) }}
                     {{ form_row(formEdit.description, {'id': 'edit-event-description'}) }}
                     {{ form_row(formEdit.location, {'id': 'edit-event-location'}) }}
