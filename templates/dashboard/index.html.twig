@@ -19,15 +19,38 @@
         </div>
 
         <section class="section">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Mes événements</h4>
+            <div class="row match-height">
+                <div class="col-md-3 col-12 ">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="/assets/images/faces/1.b3a5b17d.jpg" alt="Face 1">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">{{ app.user.contact.firstname }} {{ app.user.contact.lastname }}</h5>
+                                    <h6 class="text-muted mb-0">{{ app.user.positionCompany }}</h6>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-start mt-4">
+                                <a href="{{ path('profile', {'id': app.user.id}) }}"><button class="btn btn-primary me-3">Voir mon profil</button></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, commodi? Ullam quaerat similique iusto
-                    temporibus, vero aliquam praesentium, odit deserunt eaque nihil saepe hic deleniti? Placeat delectus
-                    quibusdam ratione ullam!</p>
-                    <a href="{{ path('calendar') }}">Voir tous mes événements</a>
+                <div class="col-md-9 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Mes événements</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div id="calendar" class="my-3"></div>
+                                    <a href="{{ path('calendar') }}"><button class="btn btn-primary me-3">Voir tous mes événements</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -77,7 +100,9 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            <a href="{{ path('contacts_index') }}">Voir tous les contacts</a>
+                                <div class="col-12 d-flex justify-content-start mt-2">
+                                    <a href="{{ path('contacts_index') }}"><button class="btn btn-primary me-3">Voir tous les contacts</button></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -126,7 +151,9 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            <a href="{{ path('companies_index') }}">Voir toutes les entreprises</a>
+                                <div id="calendar" class="mt-2"></div>
+                                    <a href="{{ path('companies_index') }}"><button class="btn btn-primary me-3">Voir toutes les entreprises</button></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,4 +162,9 @@
         </section>
 
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src=" https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js "></script>
+    {{ encore_entry_script_tags('calendar-profile') }}
 {% endblock %}
