@@ -50,56 +50,18 @@ class ContactRepository extends ServiceEntityRepository
         ;
     }
 
-    // public function findAllContactsThatAreNotUsers()
-    // {
-        // $conn = $this->getEntityManager()->getConnection();
-
-        // return $this->convertResult(
-        //     $conn
-        //         ->prepare("select * from contacts as c WHERE id NOT IN (select contact_id from users)")
-        //         ->executeQuery()
-        //         ->fetchAllAssociative()
-        // );
-
-        // $qb = $this->createQueryBuilder('c');
-        
-        // $qb->where($qb->expr()->notIn('c.id', 
-        //     $this->getEntityManager()->createQueryBuilder()
-        //         ->select('u.contact')
-        //         ->from('App\Entity\User', 'u')
-        //         ->getDQL()
-        // ));
-        
-        // return $qb->getQuery()->getResult();
-    // }
-
-    //
-    // public function convertResult(array $results)
-    // {
-    //     if (empty($results)){
-    //         return;
-    //     }
-
-    //     $contacts = [];
-
-    //     foreach ($results as $res) {
-    //         $contact = new Contact();
-
-    //         //miss setID & company due to being foreign key
-    //         $contact->setFirstname($res['firstname']);
-    //         $contact->setLastname($res['lastname']);
-    //         $contact->setEmail($res['email']);
-    //         $contact->setPhone($res['phone']);
-    //         $contact->setAddress($res['zip_code']);
-    //         $contact->setCity($res['city']);
-    //         $contact->setCountry($res['country']);
-    //         $contact->setJobPosition($res['job_position']);
-
-    //         array_push($contacts, $contact);
-
-    //         return $contacts;
-    //     }
-    // }
+    public function findAllContactsThatAreNotUsers()
+    {
+        // Adaptation of the SQL query with QueryBuilder
+        // "select * from contacts as c WHERE id NOT IN (select contact_id from users);"
+        return $this->createQueryBuilder('c')
+            ->select('c')
+            ->leftJoin('c.user', 'u',  'WITH', 'c.id = u.contact')
+            ->where('u.id IS NULL')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    /**
 //     * @return Contact[] Returns an array of Contact objects

@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 class ContactController extends AbstractController
 {
     public function index(ContactRepository $contactRepository): Response
-    {     
+    {    
         return $this->render('contacts/index.html.twig', [
-            'contacts' => $contactRepository->findAll(),
+            'contacts' => $contactRepository->findAllContactsThatAreNotUsers(),
         ]);
     }
 
@@ -54,31 +54,48 @@ class ContactController extends AbstractController
 
     public function edit(Request $request, Contact $contact, ContactRepository $contactRepository): Response
     {
-        $form = $this->createForm(ContactType::class, $contact);
-        $form->handleRequest($request);
+        // modify contact only if it's not a user
+        if($contact->getUser() == null){
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $contactRepository->save($contact, true);
+            $form = $this->createForm(ContactType::class, $contact);
+            $form->handleRequest($request);
 
-            $this->addFlash('success', 'Contact mis à jour avec succès');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $contactRepository->save($contact, true);
 
-            return $this->redirectToRoute('contacts_index', [], Response::HTTP_SEE_OTHER);
+                $this->addFlash('success', 'Contact mis à jour avec succès');
+
+                return $this->redirectToRoute('contacts_index', [], Response::HTTP_SEE_OTHER);
+            }
+            
+            return $this->render('contacts/edit.html.twig', [
+                'contact' => $contact,
+                'form' => $form,
+            ]);
+
+        } else {
+
+            return $this->render('bundles/TwigBundle/Exception/error403.html.twig',[], new Response('', 403));
         }
-        
-        return $this->render('contacts/edit.html.twig', [
-            'contact' => $contact,
-            'form' => $form,
-        ]);
     }
 
     public function delete(Request $request, Contact $contact, ContactRepository $contactRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$contact->getId(), $request->request->get('_token'))) {
-            $contactRepository->remove($contact, true);
+        // delete contact only if it's not a user
+        if($contact->getUser() == null){
+
+            if ($this->isCsrfTokenValid('delete'.$contact->getId(), $request->request->get('_token'))) {
+                $contactRepository->remove($contact, true);
+            }
+
+            $this->addFlash('success', 'Contact supprimé avec succès');
+
+            return $this->redirectToRoute('contacts_index', [], Response::HTTP_SEE_OTHER);
+
+        } else {
+
+        return $this->render('bundles/TwigBundle/Exception/error403.html.twig',[], new Response('', 403));
+
         }
-
-        $this->addFlash('success', 'Contact supprimé avec succès');
-
-        return $this->redirectToRoute('contacts_index', [], Response::HTTP_SEE_OTHER);
     }
 }
