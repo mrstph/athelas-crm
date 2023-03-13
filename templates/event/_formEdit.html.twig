@@ -20,6 +20,7 @@
                     {{ form_row(formEdit.location, {'id': 'edit-event-location'}) }}
                     {{ form_row(formEdit.background_color, {'id': 'edit-event-background-color'}) }}
                     {{ form_row(formEdit._token) }}
+                    <input type="hidden" id="edit-event-id" name="event_id" value="">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="edit-event-confirm" data-id="" class="btn btn-primary ml-1">Valider</button>
@@ -30,10 +31,3 @@
         </div>
     </div>
 </div>
-
-
-
-{# {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }} #}

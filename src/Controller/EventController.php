@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @method User getUser()
+ */
 class EventController extends AbstractController
 {
     public function index(): JsonResponse
@@ -18,7 +21,7 @@ class EventController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         // Get events for the current user
-        $events = $this->getUser()->getContact()->getEvent();
+        $events = $this->getUser()?->getContact()->getEvent();
         
         // Convert the events to an array of JSON data
         $data = [];
@@ -60,7 +63,7 @@ class EventController extends AbstractController
                     'location' => $event->getLocation()
                 ];
 
-            return new JsonResponse($data, 201);
+            return new JsonResponse($event, 201);
         }
 
         //deal with errors later
@@ -71,32 +74,52 @@ class EventController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        // dd($request->request->all());
         // update the calendar events when drag and drop
-        $data = json_decode($request->getContent(), true);
+        $data = $request->request->all();
+        // $data = json_decode($request->getContent(), true);
         $event = $eventRepository->find($data['id']);
 
-        $formEdit = $this->createForm(EventType::class, $event);
-        $formEdit->handleRequest($request);
+        // $formEdit = $this->createForm(EventType::class, $event);
+        // $formEdit->handleRequest($data);
 
-        if ($formEdit->isSubmitted() && $formEdit->isValid()) {
-
-            // handle form submission
-            return new JsonResponse($event, 200);
-
-        } elseif (!$formEdit->isSubmitted()) {
-
-            // no form submission = drag and drop
-
+        // if ($formEdit->isSubmitted() && $formEdit->isValid()) {
+            $event->setLabel($data['title']);
             $event->setDateStart(new \DateTime($data['start']));
             $event->setDateEnd(new \DateTime($data['end']));
-    
+            $event->setBackgroundColor($data['backgroundColor']);
+            if(!empty($data['description'])){$event->setAllDay($data['allDay']);}
+            if(!empty($data['description'])){$event->setDescription($data['description']);}
+            if(!empty($data['location'])){$event->setLocation($data['location']);}
+
             $eventRepository->save($event, true);
 
-            return new JsonResponse($event, 200);
-        }
+            $data[] = [
+                'id' => $event->getId(),
+                'title' => $event->getLabel(),
+                'start' => $event->getDateStart()->format('Y-m-d H:i:s'),
+                'end' => $event->getDateEnd()->format('Y-m-d H:i:s'),
+                'allDay' => $event->isAllDay(),
+                'backgroundColor' => $event->getBackgroundColor(),
+                'description' => $event->getDescription(),
+                'location' => $event->getLocation()
+            ];
+
+            return new JsonResponse($data, 200);
+        // }
+
+        // if (!$formEdit->isSubmitted()) {
+
+            // $event->setDateStart(new \DateTime($data['start']));
+            // $event->setDateEnd(new \DateTime($data['end']));
+    
+            // $eventRepository->save($event, true);
+
+            // return new JsonResponse($event, 200);
+        // }
 
         //deal with errors later
-        return new JsonResponse('error');
+    //     return new JsonResponse('error');
 
     }
 
@@ -118,7 +141,6 @@ class EventController extends AbstractController
         ];
 
         // csrf token security is disable for the demo
-
         return new JsonResponse($data, 200);
 
         //deal with errors later

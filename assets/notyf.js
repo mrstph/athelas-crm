@@ -1,4 +1,4 @@
-import { Notyf } from 'notyf';
+// import { Notyf } from 'notyf';
 // import 'notyf/notyf.min.css'; // for React, Vue and Svelte
 
 // Create an instance of Notyf

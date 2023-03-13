@@ -7,6 +7,7 @@ const editEventAllDay = document.getElementById('edit-event-all-day');
 const editEventDescription = document.getElementById('edit-event-description');
 const editEventLocation = document.getElementById('edit-event-location');
 const editEventBackgroundColor = document.getElementById('edit-event-background-color');
+const editEventID = document.getElementById('edit-event-id');
 
 const buttonEditEventConfirm = document.getElementById('edit-event-confirm');
 const buttonDeleteEvent = document.getElementById('delete-event');
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             editEventDescription.value = event.event.extendedProps.description;
             editEventLocation.value = event.event.extendedProps.location;
             editEventBackgroundColor.value = event.event.backgroundColor;
+            editEventID.value = event.event.id;
 
             buttonDeleteEvent.setAttribute('data-id', event.event.id);
             buttonEditEventConfirm.setAttribute('data-id', event.event.id);
@@ -150,17 +152,27 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: {
                 'Content-Type':'application/json'
             },
-            body: new FormData(e.target)
+            body:JSON.stringify({
+                id: editEventID.value,
+                title: editEventTitle.value,
+                start: editEventStart.value,
+                end: editEventEnd.value,
+                allDay: editEventAllDay.value,
+                description: editEventDescription.value,
+                location: editEventLocation.value,
+                backgroundColor: editEventBackgroundColor.value,
+            })
+
         })
             // handle 200 response
             .then(response => response.json())
+            .then(response => console.log(response))
             .then(calendar.refetchEvents()) //refetch all the events on the page
             .then(this.reset()) // reset the form
-            .then(addEventModal.hide()) // hide the modal
+            .then(editEventModal.hide()) // hide the modal
             .then(notyf.success('Votre événement a été modifié avec succès')) // toast success message
         // add json errors
     });
-
 
     // ~~~ DELETE EVENT ~~~
 
@@ -168,6 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // fetch datas
         fetch(window.location.protocol + '//' + window.location.host + '/api/events/' + buttonDeleteEvent.getAttribute('data-id'), { 
             method: 'DELETE',
+            headers: {
+                'Content-Type':'application/json'
+            },
             body:JSON.stringify({
                 id: buttonDeleteEvent.getAttribute('data-id')
             })
