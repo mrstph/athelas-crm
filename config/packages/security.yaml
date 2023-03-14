@@ -34,6 +34,7 @@ security:
     access_control:
         - { path: ^/dashboard, roles: ROLE_USER }
         - { path: ^/users, roles: ROLE_USER }
+        - { path: ^/contacts, roles: ROLE_USER }
         - { path: ^/companies, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/calendar, roles: ROLE_USER }
