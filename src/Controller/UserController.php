@@ -94,7 +94,7 @@ class UserController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         //prevents admin to delete himself
-        if($user->getId() === 1){
+        if($user->getRoles()[0] == 'ROLE_ADMIN'){
 
             $this->addFlash('error', 'Vous ne pouvez pas supprimer ce compte');
 

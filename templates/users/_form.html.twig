@@ -16,7 +16,6 @@
     {{ form_row(form.contact.company) }}
     {{ form_row(form._token) }}
     {% if app.request.attributes.get('_route') == 'users_edit' %}
-        {{ form_row(form.picture) }}
     {% endif %}
 {{ form_end(form, {'render_rest': false}) }}
 
@@ -35,7 +34,7 @@
         {# only show the delete button when editing a user #}
             
         {% if app.request.attributes.get('_route') == 'users_edit' %}
-            {% if user.id != 1 %}
+            {% if user.roles[0] != 'ROLE_ADMIN' %}
                 {{ include('users/_delete_form.html.twig') }}
             {% endif %}
         {% endif %}

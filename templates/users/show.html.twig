@@ -75,7 +75,7 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <div class="col-12 d-flex justify-content-start my-4">
                                         <a href="{{ path('users_edit', {'id': user.id}) }}"><button class="btn btn-primary me-1">Modifier</button></a>
-                                        {% if user.id != 1 %}
+                                        {% if user.roles[0] != 'ROLE_ADMIN' %}
                                             {{ include('users/_delete_form.html.twig') }}
                                         {% endif %}
                                     </div>

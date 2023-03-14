@@ -77,12 +77,16 @@ class EventController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $event = $eventRepository->find($data['id']);
 
+        // add controls later
+
         $event->setLabel($data['title']);
         $event->setDateStart(new \DateTime($data['start']));
         $event->setDateEnd(new \DateTime($data['end']));
         $event->setBackgroundColor($data['backgroundColor']);
-        if(!empty($data['description'])){
-            $event->setAllDay($data['allDay']);
+        if($data['allDay'] == 'false'){
+            $event->setAllDay('0');
+        } else if ($data['allDay'] == 'true'){
+            $event->setAllDay('1');
         }
         if(!empty($data['description'])){
             $event->setDescription($data['description']);
